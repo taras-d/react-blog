@@ -1,0 +1,48 @@
+{
+  "name": "react-seed",
+  "description": "Experimental project starter for React Apps",
+  "version": "0.0.1",
+  "author": "taras-d",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "bundle": "webpack",
+    "server": "webpack-dev-server --open",
+    "build": "webpack --config=webpack.config.build.js"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router-dom": "^4.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.2",
+    "cssnano": "^3.10.0",
+    "del": "^2.2.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "gulp": "^3.9.1",
+    "gulp-processhtml": "^1.1.0",
+    "gulp-shell": "^0.6.3",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "postcss": "^6.0.1",
+    "postcss-loader": "^2.0.5",
+    "run-sequence": "^1.2.2",
+    "style-loader": "^0.18.1",
+    "webpack": "^2.6.0",
+    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "browserslist": [
+    "last 10 versions",
+    "not Safari < 9",
+    "not IE < 9"
+  ]
+}
