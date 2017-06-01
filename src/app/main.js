@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter as Router } from 'react-router-dom';
 
-import '../styles/index.less';
+import '../styles/styles.less';
 
 import Root from './root';
 

@@ -1,3 +1,25 @@
 .page-header {
-    
+    padding: 20px 0;
+    background-color: silver;
+    a {
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+        text-decoration: none;
+        &:not(:first-child) {
+            margin-left: 8px;
+        }
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+        &:hover {
+            color: darken(white, 5%);
+        }
+    }
+    .left {
+        text-align: left;
+    }
+    .right {
+        text-align: right;
+    }
 }
