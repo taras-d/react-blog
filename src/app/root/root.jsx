@@ -3,15 +3,14 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 
 import './root.less';
 
-import PageLayout from '../components/pageLayout';
+import { LandingPage } from '../landing';
 
 const Root = () => {
     return (
-        <div className="root">
-            <PageLayout>
-                HOME
-            </PageLayout>
-        </div>
+        <Switch>
+            <Route path="/" exact component={LandingPage}/>
+            <Route render={() => <b>Page Not Found</b>}/>
+        </Switch>
     );
 }
 
