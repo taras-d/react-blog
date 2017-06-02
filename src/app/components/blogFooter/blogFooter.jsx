@@ -2,12 +2,12 @@ import React from 'react';
 
 import SocialIcon from '../socialIcon';
 
-import './pageFooter.less';
+import './blogFooter.less';
 
-const PageFooter = () => {
+const BlogFooter = () => {
     let copyright = `Copyright © Blog ${new Date().getFullYear()}`;
     return (
-        <div className="page-footer">
+        <div className="blog-footer">
             <SocialIcon name="facebook"/>
             <SocialIcon name="twitter"/>
             <SocialIcon name="github"/>
@@ -16,4 +16,4 @@ const PageFooter = () => {
     );
 }
 
-export default PageFooter;
+export default BlogFooter;

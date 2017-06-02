@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './pageHeader.less';
+import './blogHeader.less';
 
-const PageHeader = () => {
+const BlogHeader = () => {
     return (
-        <div className="page-header">
+        <div className="blog-header">
             <div className="container-fluid">
                 <div className="col-sm-6 left">
                     <NavLink to="/" exact>Blog</NavLink>
@@ -20,4 +20,4 @@ const PageHeader = () => {
     );
 }
 
-export default PageHeader;
+export default BlogHeader;
