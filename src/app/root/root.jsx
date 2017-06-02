@@ -3,15 +3,14 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 
 import './root.less';
 
-
-import PageHeader from '../components/pageHeader';
-import PageFooter from '../components/pageFooter';
+import PageLayout from '../components/pageLayout';
 
 const Root = () => {
     return (
         <div className="root">
-            <PageHeader/>
-            <PageFooter/>
+            <PageLayout>
+                HOME
+            </PageLayout>
         </div>
     );
 }
