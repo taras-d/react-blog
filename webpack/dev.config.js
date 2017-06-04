@@ -1,32 +1,17 @@
-/**
- * Webpack dev config
- */
-
-var webpack = require('webpack'),
-    path = require('path');
+var path = require('path'),
+    webpack = require('webpack'),
+    merge = require('webpack-merge')
     
 var HtmlWebpackPlugin = require('html-webpack-plugin'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-var srcDir = path.resolve(__dirname, 'src');
+var paths = require('./paths.js'),
+    baseConfig = require('./base.config');
 
-module.exports = {
-    entry: {
-        // Split code to app, vendors and polyfills
-        // These files will be automatically included in the index.html by HtmlWebpackPlugin
-        app: path.resolve(srcDir, 'app/main.js'),
-        vendors: path.resolve(srcDir, 'app/vendors.js'),
-        polyfills: path.resolve(srcDir, 'app/polyfills.js')
-    },
+module.exports = merge(baseConfig, {
     output: {
         filename: '[name].js',
-        path: path.resolve(srcDir, 'output')
-    },
-    resolve: {
-        extensions: ['.js', '.jsx'],
-        alias: {
-            'components': path.resolve(srcDir, 'app/components')
-        }
+        path: path.join(paths.srcDir, 'output')
     },
     devtool: 'source-map',
     module: {
@@ -65,11 +50,9 @@ module.exports = {
                     { 
                         loader: 'less-loader',
                         options: {
-                            // Include 'styles' folder to simplify import for variables and mixins
-                            // For example, "@import '../../../styles/variables'" can be changed to "@import 'variables'"
-                            // Note, to avoid style duplications use 'reference' directive, for example "@import (reference) 'mixins'"
-                            // (https://github.com/webpack-contrib/less-loader/issues/7)
-                            paths: [ path.resolve(srcDir, 'styles') ]
+                            // Include 'styles' folder to simplify import for styles
+                            // For example, "@import '../../../styles/base/variables'" can be changed to "@import 'base/variables'"
+                            paths: [ path.join(paths.srcDir, 'styles') ]
                         }
                     },
                 ]
@@ -77,8 +60,9 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: srcDir,
-        overlay: true
+        contentBase: paths.srcDir,
+        overlay: true,
+        stats: 'minimal'
     },
     plugins: [
         // Put common modules in vendors.js
@@ -87,9 +71,9 @@ module.exports = {
         }),
         // Include bundles in the index.html
         new HtmlWebpackPlugin({
-            template: path.resolve(srcDir, 'index.html')
+            template: path.join(paths.srcDir, 'index.html')
         }),
         // Uncomment line below to enable Bundle Analyzer, then run 'npm run server'
         //new BundleAnalyzerPlugin()
     ]
-}
+});

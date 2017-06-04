@@ -1,33 +1,17 @@
-/**
- * Webpack build config
- */
-
 var webpack = require('webpack'),
+    merge = require('webpack-merge'),
     path = require('path');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var buildDir = path.resolve(__dirname, 'build'),
-    srcDir = path.resolve(__dirname, 'src');
+var paths = require('./paths.js'),
+    baseConfig = require('./base.config.js');
 
-module.exports = {
-    entry: {
-        // Split code to app, vendors and polyfills
-        // These files will be automatically included in the index.html by HtmlWebpackPlugin
-        app: path.resolve(srcDir, 'app/main.js'),
-        vendors: path.resolve(srcDir, 'app/vendors.js'),
-        polyfills: path.resolve(srcDir, 'app/polyfills.js')
-    },
+module.exports = merge(baseConfig, {
     output: {
         filename: '[name].[hash].min.js',
-        path: path.resolve(buildDir, 'app')
-    },
-    resolve: {
-        extensions: ['.js', '.jsx'],
-        alias: {
-            'components': path.resolve(srcDir, 'app/components')
-        }
+        path: path.join(paths.buildDir, 'app')
     },
     module: {
         rules: [
@@ -72,7 +56,7 @@ module.exports = {
                         { 
                             loader: 'less-loader',
                             options: {
-                                paths: [ path.resolve(srcDir, 'styles') ]
+                                paths: [ path.join(paths.srcDir, 'styles') ]
                             }
                         }
                     ]
@@ -101,8 +85,8 @@ module.exports = {
         }),
         // Include bundles in the index.html
         new HtmlWebpackPlugin({
-            filename: path.resolve(buildDir, 'index.html'),
-            template: path.resolve(srcDir, 'index.html')
+            template: path.join(paths.srcDir, 'index.html'),
+            filename: path.join(paths.buildDir, 'index.html')
         })
     ]
-}
+});

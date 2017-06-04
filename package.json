@@ -5,9 +5,9 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "bundle": "webpack --config=webpack.config.dev.js",
-    "server": "webpack-dev-server --config=webpack.config.dev.js --open",
-    "build": "webpack --config=webpack.config.build.js"
+    "bundle": "webpack --config=webpack/dev.config.js",
+    "server": "webpack-dev-server --config=webpack/dev.config.js --open",
+    "build": "webpack --config=webpack/prod.config.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
@@ -37,7 +37,8 @@
     "style-loader": "^0.18.1",
     "webpack": "^2.6.0",
     "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
   },
   "browserslist": [
     "last 10 versions",
