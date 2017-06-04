@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BlogLayout from '../../../components/blogLayout';
-import IntroHeader from '../../../components/introHeader';
+import BlogLayout from 'components/blogLayout';
+import IntroHeader from 'components/introHeader';
 
 import './homePage.less';
 

@@ -24,7 +24,10 @@ module.exports = {
         path: path.resolve(buildDir, 'app')
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'components': path.resolve(srcDir, 'app/components')
+        }
     },
     module: {
         rules: [

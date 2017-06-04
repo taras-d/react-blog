@@ -23,7 +23,10 @@ module.exports = {
         path: path.resolve(srcDir, 'output')
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'components': path.resolve(srcDir, 'app/components')
+        }
     },
     devtool: 'source-map',
     module: {
