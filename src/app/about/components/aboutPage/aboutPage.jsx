@@ -10,7 +10,7 @@ class AboutPage extends React.Component {
     render() {
         return (
             <BlogLayout>
-                <IntroHeader 
+                <IntroHeader
                     imageUrl="/assets/images/about-bg.jpg"
                     title="About"
                     subtitle="About"
