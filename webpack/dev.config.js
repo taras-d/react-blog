@@ -16,19 +16,6 @@ module.exports = merge(baseConfig, {
     devtool: 'source-map',
     module: {
         rules: [
-            // Process .js and .jsx files
-            // Use babel-loader to transform ES2015/JSX to ES5
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true,
-                        presets: ['es2015', 'react']
-                    }
-                }
-            },
             // Process .less files
             // Use:
             // - style-loader to insert <style> tags in the DOM
@@ -65,10 +52,6 @@ module.exports = merge(baseConfig, {
         stats: 'minimal'
     },
     plugins: [
-        // Put common modules in vendors.js
-        new  webpack.optimize.CommonsChunkPlugin({ 
-            name: 'vendors' 
-        }),
         // Include bundles in the index.html
         new HtmlWebpackPlugin({
             template: path.join(paths.srcDir, 'index.html')

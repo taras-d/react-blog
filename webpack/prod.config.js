@@ -15,19 +15,6 @@ module.exports = merge(baseConfig, {
     },
     module: {
         rules: [
-            // Process .js and .jsx files
-            // Use babel-loader to transform ES2015/JSX to ES5
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true,
-                        presets: ['es2015', 'react']
-                    }
-                }
-            },
             // Process .less files
             // Use:
             // - css-loader to process css @imports and minify
@@ -65,10 +52,6 @@ module.exports = merge(baseConfig, {
         ]
     },
     plugins: [
-        // Put common modules in vendors.js
-        new webpack.optimize.CommonsChunkPlugin({ 
-            name: 'vendors' 
-        }),
         // Enable production mode
         new webpack.DefinePlugin({
             'process.env': {
@@ -83,7 +66,7 @@ module.exports = merge(baseConfig, {
         new ExtractTextPlugin({
             filename: 'styles.[hash].min.css'
         }),
-        // Include bundles in the index.html
+        // Include bundles in the index.html and save in build folder
         new HtmlWebpackPlugin({
             template: path.join(paths.srcDir, 'index.html'),
             filename: path.join(paths.buildDir, 'index.html')
