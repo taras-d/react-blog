@@ -1,19 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import SocialIcon from '../socialIcon';
 
 import './blogFooter.less';
 
-const BlogFooter = () => {
-    let copyright = `Copyright © Blog ${new Date().getFullYear()}`;
+const propTypes = {
+    className: PropTypes.string
+};
+
+const BlogFooter = ({ className }) => {
+    className = classNames('blog-footer', className);
     return (
-        <div className="blog-footer">
+        <div className={className}>
             <SocialIcon name="facebook"/>
             <SocialIcon name="twitter"/>
             <SocialIcon name="github"/>
-            <div className="copyright">{copyright}</div>
+            <div className="copyright">
+                {`Copyright © Blog ${fullYear}`}
+            </div>
         </div>
     );
 }
+
+BlogFooter.propTypes = propTypes;
+
+const fullYear = new Date().getFullYear();
 
 export default BlogFooter;

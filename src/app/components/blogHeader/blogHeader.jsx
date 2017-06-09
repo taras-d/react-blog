@@ -1,11 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './blogHeader.less';
 
-const BlogHeader = () => {
+const propTypes = {
+    className: PropTypes.string
+};
+
+const BlogHeader = ({ className }) => {
+    className = classNames('blog-header', className);
     return (
-        <div className="blog-header">
+        <div className={className}>
             <div className="container-fluid">
                 <div className="col-sm-6 left">
                     <NavLink to="/" exact>Blog</NavLink>
@@ -19,5 +26,7 @@ const BlogHeader = () => {
         </div>
     );
 }
+
+BlogHeader.propTypes = propTypes;
 
 export default BlogHeader;

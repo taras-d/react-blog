@@ -1,18 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import BlogHeader from '../blogHeader';
 import BlogFooter from '../blogFooter';
 
 import './blogLayout.less';
 
-const BlogLayout = ({ children }) => {
+const propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node
+};
+
+const BlogLayout = ({ className, children }) => {
+    className = classNames(className, 'blog-layout');
     return (
-        <div className="blog-layout">
+        <div className={className}>
             <BlogHeader/>
             {children}
             <BlogFooter/>
         </div>
     );
 }
+
+BlogLayout.propTypes = propTypes;
 
 export default BlogLayout;
