@@ -4,8 +4,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import './root.less';
 
 import { HomePage } from '../home';
-import { AboutPage } from '../about';
-import { ContactPage } from '../contact';
+import { AboutPage, ContactPage } from '../misc';
 
 const Root = () => {
     return (
