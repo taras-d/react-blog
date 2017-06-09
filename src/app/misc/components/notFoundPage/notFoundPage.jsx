@@ -9,13 +9,21 @@ class NotFoundPage extends React.Component {
 
     render() {
         return (
-            <BlogLayout>
+            <BlogLayout className="not-found-page">
                 <IntroHeader
                     title="Page Not Found"
                     imageUrl="/assets/images/about-bg.jpg"
                 />
-                <div>Page you are looking for has been removed or doesn't exist</div>
+                {this.getContent()}
             </BlogLayout>
+        );
+    }
+
+    getContent() {
+        return (
+            <div className="blog-layout-content">
+                Page you are looking for doesn't exist or has been removed
+            </div>
         );
     }
 

@@ -13,7 +13,7 @@ const propTypes = {
 };
 
 const BlogLayout = ({ className, children }) => {
-    className = classNames(className, 'blog-layout');
+    className = classNames('blog-layout', className);
     return (
         <div className={className}>
             <BlogHeader/>

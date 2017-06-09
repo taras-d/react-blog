@@ -5,21 +5,29 @@ import IntroHeader from 'components/introHeader';
 
 import './contactPage.less';
 
-export default class ContactPage extends React.Component {
+class ContactPage extends React.Component {
 
     render() {
         return (
-            <BlogLayout>
-                <div className="contact-page">
-                    <IntroHeader
-                        imageUrl="/assets/images/contact-bg.jpg"
-                        title="Contact"
-                        subtitle="Contact"
-                    />
-                    <div>Contact</div>
-                </div>
+            <BlogLayout className="contact-page">
+                <IntroHeader
+                    imageUrl="/assets/images/contact-bg.jpg"
+                    title="Contact"
+                    subtitle="Contact"
+                />
+                {this.getContent()}
             </BlogLayout>
         )
     }
 
+    getContent() {
+        return (
+            <div className="blog-layout-content">
+                Contact
+            </div>
+        );
+    }
+
 }
+
+export default ContactPage;
