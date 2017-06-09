@@ -8,8 +8,12 @@ const IntroHeader = ({ imageUrl, title, subtitle }) => {
     return (
         <div className="intro-header" style={style}>
             <div className="intro-title">{title}</div>
-            <div className="intro-line"></div>
-            <div className="intro-subtitle">{subtitle}</div>
+            {subtitle &&
+                <div>
+                    <div className="intro-line"></div>
+                    <div className="intro-subtitle">{subtitle}</div>
+                </div>
+            }
         </div>
     )
 }
