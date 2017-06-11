@@ -22,7 +22,10 @@ module.exports = merge(baseConfig, {
             // - less-loader to process less
             {
                 test: /\.less$/,
-                exclude: /node_modules/,
+                include: [
+                    path.join(paths.srcDir, 'app'),
+                    path.join(paths.srcDir, 'styles')
+                ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [

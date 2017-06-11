@@ -7,17 +7,17 @@ module.exports = {
     entry: {
         // Split code to app, vendors and polyfills
         // These files will be automatically included in the index.html by HtmlWebpackPlugin
-        app: path.resolve(paths.srcDir, 'app/main.js'),
-        vendors: path.resolve(paths.srcDir, 'app/vendors.js'),
-        polyfills: path.resolve(paths.srcDir, 'app/polyfills.js')
+        app: path.join(paths.srcDir, 'app/main.js'),
+        vendors: path.join(paths.srcDir, 'app/vendors.js'),
+        polyfills: path.join(paths.srcDir, 'app/polyfills.js')
     },
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
             // Aliases for common components and containers
             // (https://webpack.js.org/configuration/resolve/#resolve-alias)
-            components: path.resolve(paths.srcDir, 'app/components'),
-            containers: path.resolve(paths.srcDir, 'app/containers')
+            components: path.join(paths.srcDir, 'app/components'),
+            containers: path.join(paths.srcDir, 'app/containers')
         }
     },
     module: {
@@ -26,7 +26,9 @@ module.exports = {
             // Use babel-loader to transform ES2015/JSX to ES5
             {
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                include: [
+                    path.join(paths.srcDir, 'app')
+                ],
                 use: {
                     loader: 'babel-loader',
                     options: {

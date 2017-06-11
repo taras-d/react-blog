@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
         filename: '[name].js',
         path: path.join(paths.srcDir, 'output')
     },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     module: {
         rules: [
             // Process .less files
@@ -24,7 +24,10 @@ module.exports = merge(baseConfig, {
             // - less-loader to process less
             {
                 test: /\.less$/,
-                exclude: /node_modules/,
+                include: [
+                    path.join(paths.srcDir, 'app'),
+                    path.join(paths.srcDir, 'styles')
+                ],
                 use: [
                     { loader: 'style-loader' }, 
                     { loader: 'css-loader' },
