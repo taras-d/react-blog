@@ -3,9 +3,9 @@ import React from 'react';
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
 
-import './homePage.less';
+import './postsPage.less';
 
-export default class HomePage extends React.Component {
+class PostsPage extends React.Component {
 
     render() {
         return ( 
@@ -15,9 +15,19 @@ export default class HomePage extends React.Component {
                     title="Blog"
                     subtitle="Blog"
                 />
-                <div>Home</div>
+                {this.getContent()}
             </BlogLayout>
         );
     }
 
+    getContent() {
+        return (
+            <div className="blog-layout-content">
+                Posts 
+            </div>
+        );
+    }
+
 }
+
+export default PostsPage;
