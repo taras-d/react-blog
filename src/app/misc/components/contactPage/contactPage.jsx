@@ -11,7 +11,7 @@ class ContactPage extends React.Component {
         return (
             <BlogLayout className="contact-page">
                 <IntroHeader
-                    imageUrl="/assets/images/contact-bg.jpg"
+                    bgImage="/assets/images/contact-bg.jpg"
                     title="Contact"
                     subtitle="Contact"
                 />
@@ -22,7 +22,7 @@ class ContactPage extends React.Component {
 
     getContent() {
         return (
-            <div className="blog-layout-content">
+            <div className="blog-layout-body">
                 Contact
             </div>
         );

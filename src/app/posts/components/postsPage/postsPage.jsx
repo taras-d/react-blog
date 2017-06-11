@@ -11,7 +11,6 @@ class PostsPage extends React.Component {
         return ( 
             <BlogLayout>
                 <IntroHeader
-                    imageUrl="/assets/images/home-bg.jpg"
                     title="Blog"
                     subtitle="Blog"
                 />
@@ -22,8 +21,8 @@ class PostsPage extends React.Component {
 
     getContent() {
         return (
-            <div className="blog-layout-content">
-                Posts 
+            <div className="blog-layout-body">
+                Posts list
             </div>
         );
     }

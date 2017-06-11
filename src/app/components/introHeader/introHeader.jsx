@@ -6,19 +6,21 @@ import './introHeader.less';
 
 const propTypes = {
     className: PropTypes.string,
-    imageUrl: PropTypes.string,
+    bgImage: PropTypes.string,
     title: PropTypes.string,
     subtitle: PropTypes.string
 };
 
-const IntroHeader = ({ className, imageUrl, title, subtitle }) => {
+const defaultProps = {
+    bgImage: '/assets/images/home-bg.jpg'
+};
+
+const IntroHeader = ({ className, bgImage, title, subtitle }) => {
 
     className = classNames('intro-header', className);
 
-    const bgImg = `url(${imageUrl})`;
-
     return (
-        <div className={className} style={{ backgroundImage: bgImg }}>
+        <div className={className} style={{ backgroundImage: `url(${bgImage})` }}>
             <div className="intro-title">{title}</div>
             {subtitle &&
                 <div>
@@ -27,9 +29,10 @@ const IntroHeader = ({ className, imageUrl, title, subtitle }) => {
                 </div>
             }
         </div>
-    )
+    );
 }
 
 IntroHeader.propTypes = propTypes;
+IntroHeader.defaultProps = defaultProps;
 
 export default IntroHeader;
