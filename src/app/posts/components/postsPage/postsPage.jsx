@@ -2,6 +2,8 @@ import React from 'react';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
+import Button from 'components/button';
+import Loader from 'components/loader';
 
 import PostList from '../postList';
 
@@ -37,6 +39,8 @@ class PostsPage extends React.Component {
         return (
             <div className="blog-layout-body">
                 <PostList items={posts}/>
+                <Button className="load-more">Load more</Button>
+                {/*<Loader/>*/}
             </div>
         );
     }
