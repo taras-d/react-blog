@@ -1,19 +1,20 @@
+@import (reference) 'base/variables';
+
 .button {
-    @hover-color: #0085A1;
     display: inline-block;
     padding: 15px 25px;
     font-weight: bold;
-    background-color: white;
+    background-color: @c-white;
     border-radius: 0;
-    border: 1px solid #ccc;
+    border: 1px solid @c-alto;
     outline: none;
     &[disabled] {
         cursor: not-allowed;
         opacity: 0.65;
     }
     &:not([disabled]):hover {
-        background-color: @hover-color;
-        border-color: @hover-color;
-        color: white;
+        background-color: @c-deepcerulean;
+        border-color: @c-deepcerulean;
+        color: @c-white;
     }
 }

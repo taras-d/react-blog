@@ -1,0 +1,42 @@
+@import (reference) 'base/variables';
+
+.post-list {
+    .post-list-item {
+        line-height: 1;
+        &:not(:last-child) {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid @c-gallery;
+        }
+        .post-link {
+            color: @c-mineshaft;
+            text-decoration: none;
+            &:hover {
+                color: @c-deepcerulean;
+            }
+        }
+        .post-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .post-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        .post-meta {
+            font-family: Lora, sans-serif;
+            font-weight: 300;
+            color: @c-boulder;
+            a {
+                color: @c-mineshaft;
+                text-decoration: none;
+                &:hover {
+                    color: @c-deepcerulean;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

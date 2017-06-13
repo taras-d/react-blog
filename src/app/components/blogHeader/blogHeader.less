@@ -1,9 +1,11 @@
+@import (reference) 'base/variables';
+
 .blog-header {
     padding: 20px 0;
     a {
         font-weight: bold;
         font-size: 16px;
-        color: white;
+        color: @c-white;
         text-decoration: none;
         &:not(:first-child) {
             margin-left: 8px;
@@ -12,7 +14,7 @@
             margin-right: 8px;
         }
         &:hover {
-            color: darken(white, 5%);
+            color: darken(@c-white, 5%);
         }
     }
     .left {
