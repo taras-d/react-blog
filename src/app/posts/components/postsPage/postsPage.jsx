@@ -7,42 +7,71 @@ import Loader from 'components/loader';
 
 import PostList from '../postList';
 
-import './postsPage.less';
+import { postsService } from '../../api';
 
-// Demo posts
-const posts = [];
-for (let i = 1; i <= 5; ++i) {
-    posts.push({
-        id: i + '',
-        title: `Post ${i}`,
-        subtitle: `Subtitle ${i}`,
-        author: `Author ${i}`,
-        date: new Date()
-    });
-}
+import './postsPage.less';
 
 class PostsPage extends React.Component {
 
+    constructor() {
+
+        super(...arguments);
+
+        this.state = {
+            posts: [],
+            loading: false
+        };
+
+        this.from = 0;
+        this.perPage = 5;
+
+        this.loadMore = this.loadMore.bind(this);
+    } 
+
     render() {
+
+        let { posts, loading } = this.state;
+
         return ( 
             <BlogLayout className="posts-page">
                 <IntroHeader
                     title="Blog"
                     subtitle="Blog"
                 />
-                {this.getContent()}
+                <div className="blog-layout-body">
+                    <PostList items={posts}/>
+
+                    {loading?
+                        <div className="text-center">
+                            <Loader/>
+                        </div>:
+                        <div className="text-center">
+                            <Button onClick={this.loadMore}>Load More</Button>
+                        </div>
+                    }
+                </div>
             </BlogLayout>
         );
     }
 
-    getContent() {
-        return (
-            <div className="blog-layout-body">
-                <PostList items={posts}/>
-                <Button className="load-more">Load more</Button>
-                {/*<Loader/>*/}
-            </div>
-        );
+    componentDidMount() {
+        this.getPosts();
+    }
+
+    loadMore() {
+        this.from += this.perPage;
+        this.getPosts();
+    }
+
+    getPosts() {
+        let { from, perPage } = this;
+        this.setState({ loading: true });
+        postsService.getPosts(from, perPage).subscribe(res => {
+            this.setState({
+                posts: this.state.posts.concat(res),
+                loading: false
+            });
+        });
     }
 
 }

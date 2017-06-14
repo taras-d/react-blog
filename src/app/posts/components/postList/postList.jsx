@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import moment from 'moment';
 
 import './postList.less';
 
@@ -13,7 +12,7 @@ const propTypes = {
         title: PropTypes.string,
         subtitle: PropTypes.string,
         author: PropTypes.string,
-        date: PropTypes.date
+        date: PropTypes.string
     }))
 };
 
@@ -27,8 +26,7 @@ const PostList = ({ className, items }) => {
 
     items = items.map(post => {
 
-        const url = `/post/${post.id}`,
-            date = moment(post.date).format('MMMM DD, YYYY');
+        const url = `/post/${post.id}`;
 
         return (
             <div className="post-list-item" key={post.id}>
@@ -37,7 +35,7 @@ const PostList = ({ className, items }) => {
                     <div className="post-subtitle">{post.subtitle}</div>
                 </Link>
                 <div className="post-meta">
-                    Posted by <Link to="/">{post.author}</Link> on {date}
+                    Posted by <Link to="/">{post.author}</Link> on {post.date}
                 </div>
             </div>
         );

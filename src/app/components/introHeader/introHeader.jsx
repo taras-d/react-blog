@@ -24,7 +24,7 @@ const IntroHeader = ({ className, bgImage, title, subtitle }) => {
             <div className="intro-title">{title}</div>
             {subtitle &&
                 <div>
-                    <div className="intro-line"></div>
+                    <div className="intro-divider"></div>
                     <div className="intro-subtitle">{subtitle}</div>
                 </div>
             }
