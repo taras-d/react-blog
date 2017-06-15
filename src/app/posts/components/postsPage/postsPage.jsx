@@ -7,7 +7,7 @@ import Loader from 'components/loader';
 
 import PostList from '../postList';
 
-import { postsService } from '../../api';
+import { getService } from 'api/bottle';
 
 import './postsPage.less';
 
@@ -24,6 +24,8 @@ class PostsPage extends React.Component {
 
         this.from = 0;
         this.perPage = 5;
+
+        this.postsService = getService('PostsService');
 
         this.loadMore = this.loadMore.bind(this);
     } 
@@ -66,7 +68,7 @@ class PostsPage extends React.Component {
     getPosts() {
         let { from, perPage } = this;
         this.setState({ loading: true });
-        postsService.getPosts(from, perPage).subscribe(res => {
+        this.postsService.getPosts(from, perPage).subscribe(res => {
             this.setState({
                 posts: this.state.posts.concat(res),
                 loading: false

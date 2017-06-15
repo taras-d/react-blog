@@ -14,9 +14,4 @@ class PostsService {
 
 }
 
-const instance = new PostsService();
-
-export {
-    PostsService,
-    instance as postsService
-}
+export { PostsService }
