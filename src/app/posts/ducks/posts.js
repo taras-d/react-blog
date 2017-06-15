@@ -1,3 +1,5 @@
+import update from 'immutability-helper';
+
 import { getService } from 'api/bottle';
 
 const postsService = getService('PostsService');
@@ -14,36 +16,38 @@ const RESET = '@posts/RESET';
 
 const defaultState = {
     data: [],
-    more: true,
+    page: 1,
+    prev: null,
+    next: null,
     loading: false,
     error: null
 };
 
 export default function reducer(state = defaultState, action) {
 
+    const payload = action.payload;
+
     switch (action.type) {
 
         case REQUEST:
-            return Object.assign({}, state, {
-                loading: true,
-                error: null,
+            return update(state, {
+                loading: {$set: true},
+                page: {$set: payload}
             });
 
-        case REQUEST_OK:
-            return {
-                data: state.data.concat(action.payload.data),
-                more: action.payload.more,
-                loading: false,
-                error: null
-            };
+        case REQUEST_OK: 
+            return update(state, {
+                data: {$push: payload.data},
+                prev: {$set: payload.prev},
+                next: {$set: payload.next},
+                loading: {$set: false}
+            });
 
         case REQUEST_FAIL:
-            return {
-                data: [],
-                more: false,
-                loading: false,
-                error: action.payload
-            };
+            return update(state, {
+                error: {$set: action.payload},
+                loading: {$set: false}
+            });
 
         case RESET:
             return defaultState;
@@ -57,16 +61,16 @@ export default function reducer(state = defaultState, action) {
 
 // Action creators
 
-export const request = from => ({ type: REQUEST, payload: from });
+export const request = page => ({ type: REQUEST, payload: page });
 export const requestOk = data => ({ type: REQUEST_OK, payload: data });
 export const requestFail = err => ({ type: REQUEST_FAIL, payload: err });
 
 export const reset = () => ({ type: RESET, payload: null });
 
-export const getPosts = (from) => {
+export const getPosts = page => {
     return dispatch => {
-        dispatch( request() );
-        return postsService.getPosts(from).do(
+        dispatch( request(page) );
+        return postsService.getPosts(page).do(
             data => dispatch( requestOk(data) ),
             err => dispatch( requestFail(err) )
         );

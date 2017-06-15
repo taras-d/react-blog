@@ -1,18 +1,23 @@
 import { Observable } from 'rxjs/Observable';
 
-import posts from './posts.json';
+import json from './posts.json';
+
+let posts = json;
+posts.forEach(p => p.id += '');
 
 class PostsService {
 
-    getPosts(from = 0, perPage = 5) {
+    getPosts(page = 1, perPage = 5) {
 
-        let data = posts.slice(from, from + perPage);
-        data.forEach(i => i.id += '');
+        const from = (page - 1) * perPage,
+            to = page * perPage;
 
-        return Observable.of({
-            data: data,
-            more: from + perPage < posts.length
-        }).delay(500);
+        const data = posts.slice(from, to);
+
+        const prev = page > 1? page - 1: null,
+            next = to < posts.length? page + 1: null;
+
+        return Observable.of({ data, prev, next }).delay(1000);
     }
 
 }

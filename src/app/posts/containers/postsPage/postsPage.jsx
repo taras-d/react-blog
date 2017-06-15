@@ -16,36 +16,34 @@ class PostsPage extends React.Component {
 
     constructor() {
         super(...arguments);
-
-        this.from = 0;
         this.loadMore = this.loadMore.bind(this);
     } 
 
     render() {
-
-        let { posts } = this.props;
-
         return ( 
             <BlogLayout className="posts-page">
-                <IntroHeader
-                    title="Blog"
-                    subtitle="Blog"
-                />
-                <div className="blog-layout-body">
-                    <PostList items={posts.data}/>
-                    <div className="load-more">
-                        {posts.loading && 
-                            <Loader/>}
-                        {(!posts.loading && posts.more) && 
-                            <Button onClick={this.loadMore}>Load More</Button>}
-                    </div>
-                </div>
+                <IntroHeader title="Blog" subtitle="Blog"/>
+                {this.getContent()}
             </BlogLayout>
         );
     }
 
+    getContent() {
+        let { posts } = this.props;
+        return (
+            <div className="blog-layout-body">
+                <PostList items={posts.data}/>
+                <div className="load-more">
+                    {posts.loading && <Loader/>}
+                    {(!posts.loading && posts.next) && 
+                        <Button onClick={this.loadMore}>Load More</Button>}
+                </div>
+            </div>
+        );
+    }
+
     componentDidMount() {
-        this.getPosts();
+        this.getPosts( this.props.posts.page );
     }
 
     componentWillUnmount() {
@@ -56,18 +54,17 @@ class PostsPage extends React.Component {
     }
 
     loadMore() {
-        this.from += 5;
-        this.getPosts();
+        this.getPosts( this.props.posts.page + 1 );
+    }
+
+    getPosts(page) {
+        let { dispatch } = this.props;
+        this.getSub = dispatch( actions.getPosts(page) ).subscribe();
     }
 
     resetPosts() {
         let { dispatch } = this.props;
         dispatch( actions.reset() );
-    }
-
-    getPosts() {
-        let { dispatch } = this.props;
-        this.getSub = dispatch( actions.getPosts(this.from) ).subscribe();
     }
 
 }
