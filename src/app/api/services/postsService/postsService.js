@@ -9,7 +9,10 @@ class PostsService {
         let data = posts.slice(from, from + perPage);
         data.forEach(i => i.id += '');
 
-        return Observable.of(data).delay(500);
+        return Observable.of({
+            data: data,
+            more: from + perPage < posts.length
+        }).delay(500);
     }
 
 }
