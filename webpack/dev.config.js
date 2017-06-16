@@ -10,8 +10,7 @@ var paths = require('./paths.js'),
 
 module.exports = merge(baseConfig, {
     output: {
-        filename: '[name].js',
-        path: path.join(paths.srcDir, 'output')
+        filename: '[name].js'
     },
     devtool: 'cheap-module-eval-source-map',
     module: {
