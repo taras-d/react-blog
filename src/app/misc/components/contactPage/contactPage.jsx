@@ -15,16 +15,10 @@ class ContactPage extends React.Component {
                     title="Contact"
                     subtitle="Contact"
                 />
-                {this.getContent()}
+                <div className="page-content">
+                    Contact
+                </div>
             </BlogLayout>
-        )
-    }
-
-    getContent() {
-        return (
-            <div className="page-content">
-                Contact
-            </div>
         );
     }
 

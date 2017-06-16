@@ -5,29 +5,24 @@ import IntroHeader from 'components/introHeader';
 
 import './aboutPage.less';
 
-class AboutPage extends React.Component {
-
-    render() {
-        return (
-            <BlogLayout className="about-page">
-                <IntroHeader
-                    bgImage="/assets/images/about-bg.jpg"
-                    title="About"
-                    subtitle="About"
-                />
-                {this.getBody()}
-            </BlogLayout>
-        )
-    }
-
-    getBody() {
-        return (
+const AboutPage = () => {
+    return (
+        <BlogLayout className="about-page">
+            <IntroHeader
+                bgImage="/assets/images/about-bg.jpg"
+                title="About"
+                subtitle="About"
+            />
             <div className="page-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultricies ipsum id scelerisque placerat. Proin egestas fringilla pharetra. Vestibulum nec odio tortor. Sed quam nunc, vulputate in volutpat eu, tincidunt vitae neque. Morbi tincidunt, ex a faucibus convallis, orci ipsum porttitor ipsum, a lobortis libero ex sit amet turpis. Nam varius interdum metus eu malesuada. Quisque sed consequat lectus. Mauris consectetur vehicula egestas. Maecenas eget tortor et nisl varius scelerisque nec in tellus. Cras dolor est, consequat et mauris ut, tempor sagittis sem.</p>
+                {text.map((t, i) => <p key={i}>{t}</p>)}
             </div>
-        );
-    }
-
+        </BlogLayout>
+    );
 }
+
+const text = [
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ligula sapien, blandit ut ullamcorper nec, dictum at libero. Nunc euismod, odio ac eleifend ultricies, orci libero laoreet nunc, nec pretium arcu est a elit. Vestibulum a congue risus, sit amet aliquam arcu. Praesent fringilla a tellus vel gravida. Aenean luctus cursus tristique.',
+    'Aenean aliquet magna eu urna pulvinar, et interdum leo tincidunt. Fusce commodo tellus vel congue lobortis. Suspendisse ac purus faucibus, pretium tortor quis, fermentum dolor.'
+];
 
 export default AboutPage;

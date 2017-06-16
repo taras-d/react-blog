@@ -36,7 +36,7 @@ class PostsPage extends React.Component {
         return (
             <div className="page-content">
                 <PostList items={posts.data}/>
-                <div className="text-center">
+                <div className="load-more">
                     {posts.loading && <Loader/>}
                     {(!posts.loading && posts.next) && 
                         <Button onClick={this.loadMore}>Load More</Button>}

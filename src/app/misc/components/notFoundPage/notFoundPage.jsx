@@ -5,28 +5,18 @@ import IntroHeader from 'components/introHeader';
 
 import './notFoundPage.less';
 
-class NotFoundPage extends React.Component {
-
-    render() {
-        return (
-            <BlogLayout className="not-found-page">
-                <IntroHeader
-                    title="Page Not Found"
-                    imageUrl="/assets/images/about-bg.jpg"
-                />
-                {this.getContent()}
-            </BlogLayout>
-        );
-    }
-
-    getContent() {
-        return (
+const NotFoundPage = () => {
+    return (
+        <BlogLayout className="not-found-page">
+            <IntroHeader
+                title="Page Not Found"
+                imageUrl="/assets/images/about-bg.jpg"
+            />
             <div className="page-content text-center">
                 Page you are looking for doesn't exist or has been removed
             </div>
-        );
-    }
-
+        </BlogLayout>
+    );
 }
 
 export default NotFoundPage;
