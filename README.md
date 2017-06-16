@@ -1,6 +1,6 @@
 # react-blog
 
-*In progress!*
+**_In progress!_**
 
 Single Page Application blog
 
@@ -21,3 +21,4 @@ npm run server   # start webpack dev server
 - [ ] Input component
 - [ ] Modal component
 - [ ] Contact form
+- [ ] Demo link
