@@ -12,7 +12,8 @@ const propTypes = {
         title: PropTypes.string,
         subtitle: PropTypes.string,
         author: PropTypes.string,
-        date: PropTypes.string
+        date: PropTypes.string,
+        formatedDate: PropTypes.string
     }))
 };
 
@@ -35,7 +36,7 @@ const PostList = ({ className, items }) => {
                     <div className="post-subtitle">{post.subtitle}</div>
                 </Link>
                 <div className="post-meta">
-                    Posted by <Link to="/">{post.author}</Link> on {post.date}
+                    Posted by <Link to="/">{post.author}</Link> on {post.formatedDate}
                 </div>
             </div>
         );

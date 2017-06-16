@@ -1,9 +1,8 @@
 import { Observable } from 'rxjs/Observable';
+import moment from 'moment';
 
-import json from './posts.json';
-
-let posts = json;
-posts.forEach(p => p.id += '');
+import posts from './data.json';
+posts.forEach(p => p.formatedDate = moment(p.date).format('MMMM DD, YYYY'));
 
 class PostsService {
 

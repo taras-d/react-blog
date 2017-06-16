@@ -18,7 +18,9 @@ module.exports = {
             // (https://webpack.js.org/configuration/resolve/#resolve-alias)
             api: path.join(paths.srcDir, 'app/api'),
             components: path.join(paths.srcDir, 'app/components'),
-            containers: path.join(paths.srcDir, 'app/containers')
+            containers: path.join(paths.srcDir, 'app/containers'),
+            // Moment
+            moment: 'moment-mini'
         }
     },
     module: {

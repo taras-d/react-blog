@@ -8,6 +8,8 @@ import Loader from 'components/loader';
 
 import PostList from '../../components/postList';
 
+import { unsub } from 'api/utils';
+
 import * as actions from '../../ducks/posts';
 
 import './postsPage.less';
@@ -16,6 +18,7 @@ class PostsPage extends React.Component {
 
     constructor() {
         super(...arguments);
+        this.getSub = null;
         this.loadMore = this.loadMore.bind(this);
     } 
 
@@ -23,17 +26,17 @@ class PostsPage extends React.Component {
         return ( 
             <BlogLayout className="posts-page">
                 <IntroHeader title="Blog" subtitle="Blog"/>
-                {this.getContent()}
+                {this.renderContent()}
             </BlogLayout>
         );
     }
 
-    getContent() {
+    renderContent() {
         let { posts } = this.props;
         return (
-            <div className="blog-layout-body">
+            <div className="page-content">
                 <PostList items={posts.data}/>
-                <div className="load-more">
+                <div className="text-center">
                     {posts.loading && <Loader/>}
                     {(!posts.loading && posts.next) && 
                         <Button onClick={this.loadMore}>Load More</Button>}
@@ -48,9 +51,7 @@ class PostsPage extends React.Component {
 
     componentWillUnmount() {
         this.resetPosts();
-        if (this.getSub) {
-            this.getSub.unsubscribe();
-        }
+        unsub(this.getSub);
     }
 
     loadMore() {

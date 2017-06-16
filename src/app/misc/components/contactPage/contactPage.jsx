@@ -22,7 +22,7 @@ class ContactPage extends React.Component {
 
     getContent() {
         return (
-            <div className="blog-layout-body">
+            <div className="page-content">
                 Contact
             </div>
         );

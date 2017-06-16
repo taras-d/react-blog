@@ -21,7 +21,7 @@ class NotFoundPage extends React.Component {
 
     getContent() {
         return (
-            <div className="blog-layout-body">
+            <div className="page-content text-center">
                 Page you are looking for doesn't exist or has been removed
             </div>
         );

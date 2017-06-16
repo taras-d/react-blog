@@ -28,7 +28,7 @@ class PostPage extends React.Component {
 
     getContent() {
         return (
-            <div className="blog-layout-body">
+            <div className="page-content">
                 <PostDetail content={'Post content'}/>
             </div>
         );
