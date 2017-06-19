@@ -1,12 +1,13 @@
-import { Observable } from 'rxjs/Observable';
 import moment from 'moment';
+
+import { delayResponse } from 'api/utils';
 
 import posts from './data.json';
 posts.forEach(p => p.formatedDate = moment(p.date).format('MMMM DD, YYYY'));
 
 const delay = 300;
 
-class PostsService {
+export class PostsService {
 
     getPosts(page = 1, perPage = 5) {
 
@@ -18,32 +19,17 @@ class PostsService {
         const prev = page > 1? page - 1: null,
             next = to < posts.length? page + 1: null;
 
-        return this._delayResponse({ data, prev, next });
+        return delayResponse({ data, prev, next}, 300);
     }
 
     getPost(id) {
         let post = posts.find(i => i.id === id);
-        return this._delayResponse(
+        return delayResponse(
             post?
             { data: post }:
-            { error: { message: '404 Not Found'} }
+            { error: { message: '404 Not Found'} },
+            300
         );
     }
 
-    _delayResponse(res) {
-        return Observable.create(obs => {
-            const id = setTimeout(() => {
-                if (res.error) {
-                    obs.error(res);
-                } else {
-                    obs.next(res);
-                    obs.complete();
-                }
-            }, 300);
-            return () => clearTimeout(id);
-        });
-    }
-
 }
-
-export { PostsService }
