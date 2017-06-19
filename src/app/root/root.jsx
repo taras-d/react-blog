@@ -4,7 +4,7 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import './root.less';
 
 import { PostListPage, PostDetailPage } from '../posts';
-import { AboutPage, ContactPage, NotFoundPage } from '../misc';
+import { AboutPage, ContactPage, ErrorPage } from '../misc';
 
 const Root = () => {
     return (
@@ -13,7 +13,7 @@ const Root = () => {
             <Route path="/post/:id" exact component={PostDetailPage}/>
             <Route path="/about" exact component={AboutPage}/>
             <Route path="/contact" exact component={ContactPage}/>
-            <Route component={NotFoundPage}/>
+            <Route component={ErrorPage}/>
         </Switch>
     );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 import { unsub } from 'api/utils';
 
@@ -20,12 +21,22 @@ class PostDetailPage extends React.Component {
     }
 
     render() {
-        let { detail } = this.props;
+        let detail = this.props.detail;
         return (
             <BlogLayout className="post-detail-page">
                 <PostDetail post={detail.data}/>
             </BlogLayout>
         )
+    }
+
+    componentWillReceiveProps(newProps) {
+        let detail = newProps.detail;
+        if (detail.error) {
+            this.props.history.push({
+                pathname: '/error',
+                search: queryString.stringify({ reason: detail.error.message })
+            });
+        }
     }
     
     componentDidMount() {

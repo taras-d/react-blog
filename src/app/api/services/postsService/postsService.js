@@ -4,6 +4,8 @@ import moment from 'moment';
 import posts from './data.json';
 posts.forEach(p => p.formatedDate = moment(p.date).format('MMMM DD, YYYY'));
 
+const delay = 300;
+
 class PostsService {
 
     getPosts(page = 1, perPage = 5) {
@@ -20,8 +22,15 @@ class PostsService {
     }
 
     getPost(id) {
-        let post = posts.find(i => i.id === id);
-        return Observable.of(post).delay(300);
+        return Observable.create(obs => {
+            let post = posts.find(i => i.id === id);
+            if (post) {
+                obs.next(post);
+                obs.complete();
+            } else {
+                obs.error({ message: '404 Not Found' });
+            }
+        }).delay(delay);
     }
 
 }

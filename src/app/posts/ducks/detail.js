@@ -25,14 +25,14 @@ export default function reducer(state = initialState, action) {
 
         case GET_POST:
             return update(state, {
-                loading: {$set: true},
-                data: {$set: null}
+                data: {$set: null},
+                loading: {$set: true}
             });
 
         case GET_POST_OK:
             return update(state, {
-                loading: {$set: false},
-                data: {$set: action.payload}
+                data: {$set: action.payload},
+                loading: {$set: false}
             });
 
         case GET_POST_FAIL:
