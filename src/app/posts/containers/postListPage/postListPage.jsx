@@ -10,7 +10,7 @@ import PostList from '../../components/postList';
 
 import { unsub } from 'api/utils';
 
-import * as actions from '../../ducks/postList';
+import * as actions from '../../ducks/list';
 
 import './postListPage.less';
 
@@ -50,8 +50,8 @@ class PostListPage extends React.Component {
     }
 
     componentWillUnmount() {
-        this.resetPosts();
         unsub(this.getSub);
+        this.resetPosts();
     }
 
     loadMore() {
@@ -64,8 +64,7 @@ class PostListPage extends React.Component {
     }
 
     resetPosts() {
-        let { dispatch } = this.props;
-        dispatch( actions.reset() );
+        this.props.dispatch( actions.reset() );
     }
 
 }

@@ -9,7 +9,7 @@ const postsService = getService('PostsService');
 const GET_POST      = 'posts/GET_POST';
 const GET_POST_OK   = 'posts/GET_POST_OK';
 const GET_POST_FAIL = 'posts/GET_POST_FAIL';
-const RESET         = 'posts/RESET';
+const RESET_POST    = 'posts/RESET_POST';
 
 // Reducer
 
@@ -25,7 +25,8 @@ export default function reducer(state = initialState, action) {
 
         case GET_POST:
             return update(state, {
-                loading: {$set: true}
+                loading: {$set: true},
+                data: {$set: null}
             });
 
         case GET_POST_OK:
@@ -40,11 +41,11 @@ export default function reducer(state = initialState, action) {
                 error: {$set: action.payload}
             });
 
-        case RESET:
+        case RESET_POST:
             return initialState;
 
         default:
-            return initialState;
+            return state;
 
     }
 
@@ -55,6 +56,8 @@ export default function reducer(state = initialState, action) {
 export const getPost = () => ({ type: GET_POST, payload: null });
 export const getPostOk = data => ({ type: GET_POST_OK, payload: data });
 export const getPostFail = err => ({ type: GET_POST_FAIL, payload: err });
+
+export const reset = () => ({ type: RESET_POST, payload: null });
 
 export const getPostAsync = id => {
     return dispatch => {
