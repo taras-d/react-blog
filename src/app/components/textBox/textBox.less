@@ -1,0 +1,46 @@
+@import (reference) 'base/variables';
+
+.textbox {
+    position: relative;
+    border-bottom: 1px solid @c-gallery;
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        .textbox-input {
+            cursor: not-allowed;
+        }
+    }
+    &.error {
+        border-color: @c-red;
+    }
+    .textbox-input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background-color: transparent;
+        padding: 20px;
+    }
+    textarea.textbox-input {
+        resize: none;
+        height: 150px;
+    }
+    .textbox-label {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        opacity: 0;
+        transition: all 0.2s linear;
+        font-size: 12px;
+        font-weight: 800;
+        color: @c-deepcerulean;
+        &.fadein {
+            opacity: 1;
+            top: 0;
+        }
+    }
+    .textbox-error {
+        padding: 5px 20px;
+        color: @c-red;
+        font-size: 12px;
+    }
+}

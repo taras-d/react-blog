@@ -15,7 +15,6 @@ const RESET_POST    = 'posts/RESET_POST';
 
 const initialState = {
     data: null,
-    loading: false,
     error: null
 };
 
@@ -25,20 +24,17 @@ export default function reducer(state = initialState, action) {
 
         case GET_POST:
             return update(state, {
-                data: {$set: null},
-                loading: {$set: true}
+                data: {$set: null}
             });
 
         case GET_POST_OK:
             return update(state, {
-                data: {$set: action.payload},
-                loading: {$set: false}
+                data: {$set: action.payload.data}
             });
 
         case GET_POST_FAIL:
             return update(state, {
-                loading: {$set: false},
-                error: {$set: action.payload}
+                error: {$set: action.payload.error}
             });
 
         case RESET_POST:
