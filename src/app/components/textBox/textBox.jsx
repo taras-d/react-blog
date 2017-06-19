@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import './textBox.less';
 
 const propTypes = {
+    name: PropTypes.string,
     multiline: PropTypes.bool,
     placeholder: PropTypes.string,
     className: PropTypes.string,
@@ -16,6 +17,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+    name: '',
     multiline: false,
     placeholder: '',
     className: '',
@@ -35,7 +37,7 @@ class TextBox extends React.Component {
     
     render() {
 
-        let { multiline, placeholder, className, password, disabled,
+        let { name, multiline, placeholder, className, password, disabled,
         error, value, onValueChange } = this.props;
 
         className = classNames('textbox', className, { error, disabled });
@@ -50,12 +52,13 @@ class TextBox extends React.Component {
                 }
                 {multiline?
                     <textarea className="textbox-input"
+                        name={name}
                         placeholder={placeholder} 
                         disabled={disabled}
                         value={value} 
                         onChange={this.valueChange}/>:
                     <input className="textbox-input"
-                        type="text"
+                        name={name}
                         type={password? 'password': 'text'}
                         placeholder={placeholder}
                         disabled={disabled}
@@ -75,7 +78,8 @@ class TextBox extends React.Component {
     }
 
     valueChange(event) {
-        this.props.onValueChange(event.target.value || '', event);
+        const target = event.target;
+        this.props.onValueChange(target.value || '', target.name, event);
     }
 }
 

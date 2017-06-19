@@ -3,9 +3,16 @@ import React from 'react';
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
 
+import ContactForm from '../../components/contactForm';
+
 import './contactPage.less';
 
 class ContactPage extends React.Component {
+
+    constructor() {
+        super(...arguments);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
 
     render() {
         return (
@@ -16,10 +23,14 @@ class ContactPage extends React.Component {
                     subtitle="Contact"
                 />
                 <div className="page-content">
-                    Contact
+                    <ContactForm onSubmit={this.onSubmit}/>
                 </div>
             </BlogLayout>
         );
+    }
+
+    onSubmit(data) {
+        console.log(data);
     }
 
 }

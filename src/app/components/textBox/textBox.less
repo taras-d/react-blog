@@ -3,6 +3,7 @@
 .textbox {
     position: relative;
     border-bottom: 1px solid @c-gallery;
+    padding: 30px 20px 20px;
     &.disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -12,13 +13,14 @@
     }
     &.error {
         border-color: @c-red;
+        padding-bottom: 0;
     }
     .textbox-input {
         width: 100%;
         border: 0;
         outline: 0;
         background-color: transparent;
-        padding: 20px;
+        padding: 0;
     }
     textarea.textbox-input {
         resize: none;
@@ -26,7 +28,7 @@
     }
     .textbox-label {
         position: absolute;
-        top: 20px;
+        top: 30px;
         left: 20px;
         opacity: 0;
         transition: all 0.2s linear;
@@ -35,7 +37,7 @@
         color: @c-deepcerulean;
         &.fadein {
             opacity: 1;
-            top: 0;
+            top: 10px;
         }
     }
     .textbox-error {
