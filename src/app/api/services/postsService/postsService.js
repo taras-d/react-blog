@@ -16,7 +16,12 @@ class PostsService {
         const prev = page > 1? page - 1: null,
             next = to < posts.length? page + 1: null;
 
-        return Observable.of({ data, prev, next }).delay(1000);
+        return Observable.of({ data, prev, next }).delay(300);
+    }
+
+    getPost(id) {
+        let post = posts.find(i => i.id === id);
+        return Observable.of(post).delay(300);
     }
 
 }

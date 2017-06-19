@@ -6,10 +6,10 @@ const postsService = getService('PostsService');
 
 // Actions
 
-const REQUEST = '@posts/REQUEST';
-const REQUEST_OK = '@posts/REQUEST_OK';
-const REQUEST_FAIL = '@posts/REQUEST_FAIL';
-const RESET = '@posts/RESET';
+const GET_POSTS =      'posts/GET_POSTS';
+const GET_POSTS_OK =   'posts/GET_POSTS_OK';
+const GET_POSTS_FAIL = 'posts/GET_POSTS_FAIL';
+const RESET =          'posts/RESET';
 
 
 // Reducer
@@ -29,13 +29,13 @@ export default function reducer(state = defaultState, action) {
 
     switch (action.type) {
 
-        case REQUEST:
+        case GET_POSTS:
             return update(state, {
                 loading: {$set: true},
                 page: {$set: payload}
             });
 
-        case REQUEST_OK: 
+        case GET_POSTS_OK: 
             return update(state, {
                 data: {$push: payload.data},
                 prev: {$set: payload.prev},
@@ -43,7 +43,7 @@ export default function reducer(state = defaultState, action) {
                 loading: {$set: false}
             });
 
-        case REQUEST_FAIL:
+        case GET_POSTS_FAIL:
             return update(state, {
                 error: {$set: action.payload},
                 loading: {$set: false}
@@ -61,18 +61,18 @@ export default function reducer(state = defaultState, action) {
 
 // Action creators
 
-export const request = page => ({ type: REQUEST, payload: page });
-export const requestOk = data => ({ type: REQUEST_OK, payload: data });
-export const requestFail = err => ({ type: REQUEST_FAIL, payload: err });
+export const getPosts = page => ({ type: GET_POSTS, payload: page });
+export const getPostsOk = data => ({ type: GET_POSTS_OK, payload: data });
+export const getPostsFail = err => ({ type: GET_POSTS_FAIL, payload: err });
 
 export const reset = () => ({ type: RESET, payload: null });
 
-export const getPosts = page => {
+export const getPostsAsync = page => {
     return dispatch => {
-        dispatch( request(page) );
+        dispatch( getPosts(page) );
         return postsService.getPosts(page).do(
-            data => dispatch( requestOk(data) ),
-            err => dispatch( requestFail(err) )
+            data => dispatch( getPostsOk(data) ),
+            err => dispatch( getPostsFail(err) )
         );
     }
 }

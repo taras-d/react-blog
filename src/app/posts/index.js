@@ -1,10 +1,12 @@
-import PostsPage from './containers/postsPage';
-import PostPage from './components/postPage';
+import { combineReducers } from 'redux';
 
-import postsReducer from './ducks/posts';
+import PostListPage from './containers/postListPage';
+import PostDetailPage from './containers/postDetailPage';
+
+import reducer from './ducks';
 
 export {
-    PostsPage,
-    postsReducer,
-    PostPage
+    PostListPage,
+    PostDetailPage,
+    reducer
 }

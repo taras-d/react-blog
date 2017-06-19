@@ -1,8 +1,35 @@
+@import (reference) 'base/variables';
+
 .post-detail {
-    p:not(:first-child) {
-        margin-top: 10px;
-    }
-    p:not(:last-child) {
-        margin-bottom: 10px;
+    .post-intro {
+        min-height: 450px;
+        background-image: url(/assets/images/home-bg.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: @c-gray;
+        padding: 125px 20px;
+        color: @c-white;
+        text-align: center;
+        line-height: 1;
+        .post-intro-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .post-title {
+            font-size: 55px;
+            font-weight: 800;
+        }
+        .post-subtitle {
+            margin: 10px 0 30px;
+            font-size: 30px;
+        }
+        .post-meta {
+            font-family: Lora;
+            font-size: 18px;
+            a {
+                color: @c-white;
+            }
+        }
     }
 }

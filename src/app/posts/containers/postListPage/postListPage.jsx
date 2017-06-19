@@ -10,11 +10,11 @@ import PostList from '../../components/postList';
 
 import { unsub } from 'api/utils';
 
-import * as actions from '../../ducks/posts';
+import * as actions from '../../ducks/postList';
 
-import './postsPage.less';
+import './postListPage.less';
 
-class PostsPage extends React.Component {
+class PostListPage extends React.Component {
 
     constructor() {
         super(...arguments);
@@ -24,7 +24,7 @@ class PostsPage extends React.Component {
 
     render() {
         return ( 
-            <BlogLayout className="posts-page">
+            <BlogLayout className="post-list-page">
                 <IntroHeader title="Blog" subtitle="Blog"/>
                 {this.renderContent()}
             </BlogLayout>
@@ -32,13 +32,13 @@ class PostsPage extends React.Component {
     }
 
     renderContent() {
-        let { posts } = this.props;
+        let { list } = this.props;
         return (
             <div className="page-content">
-                <PostList items={posts.data}/>
+                <PostList items={list.data}/>
                 <div className="load-more">
-                    {posts.loading && <Loader/>}
-                    {(!posts.loading && posts.next) && 
+                    {list.loading && <Loader/>}
+                    {(!list.loading && list.next) && 
                         <Button onClick={this.loadMore}>Load More</Button>}
                 </div>
             </div>
@@ -46,7 +46,7 @@ class PostsPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getPosts( this.props.posts.page );
+        this.getPosts( this.props.list.page );
     }
 
     componentWillUnmount() {
@@ -55,12 +55,12 @@ class PostsPage extends React.Component {
     }
 
     loadMore() {
-        this.getPosts( this.props.posts.page + 1 );
+        this.getPosts( this.props.list.page + 1 );
     }
 
     getPosts(page) {
         let { dispatch } = this.props;
-        this.getSub = dispatch( actions.getPosts(page) ).subscribe();
+        this.getSub = dispatch( actions.getPostsAsync(page) ).subscribe();
     }
 
     resetPosts() {
@@ -70,8 +70,4 @@ class PostsPage extends React.Component {
 
 }
 
-const mapStateToProps = state => {
-    return { posts: state.posts };
-}
-
-export default connect(mapStateToProps)(PostsPage);
+export default connect( state => ({ list: state.posts.list }) )(PostListPage);

@@ -14,7 +14,7 @@ npm run server   # start webpack dev server
 
 ## Todo
 - [x] Posts page
-- [ ] Post page
+- [x] Post page
 - [x] About page
 - [x] Contact page
 - [x] Not found page
