@@ -13,14 +13,6 @@ npm run server   # start webpack dev server
 ```
 
 ## Todo
-- [x] Posts page
-- [x] Post page
-- [x] About page
-- [x] Contact page
-- [x] Not found page
-- [x] Textbox component
-- [x] Modal component
-- [ ] Modal component animation
-- [ ] Contact form
-- [ ] Demo link
-- [ ] Mobile header
+- Modal animation
+- Contact form validation
+- Contact message request
