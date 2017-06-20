@@ -36,11 +36,14 @@ class PostListPage extends React.Component {
         return (
             <div className="page-content">
                 <PostList items={list.data}/>
-                <div className="load-more">
-                    {list.loading && <Loader/>}
-                    {(!list.loading && list.next) && 
-                        <Button onClick={this.loadMore}>Load More</Button>}
-                </div>
+                {list.next &&
+                    <div className="load-more">
+                        {list.loading? 
+                            <Loader/>: 
+                            <Button onClick={this.loadMore}>Load more</Button>
+                        }
+                    </div>
+                }
             </div>
         );
     }
