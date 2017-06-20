@@ -13,16 +13,12 @@ const BlogHeader = ({ className }) => {
     className = classNames('blog-header', className);
     return (
         <div className={className}>
-            <div className="container-fluid">
-                <div className="col-sm-6 left">
-                    <NavLink to="/" exact>Blog</NavLink>
-                </div>
-                <div className="col-sm-6 right">
-                    <NavLink to="/" exact>Home</NavLink>
-                    <NavLink to="/about">About</NavLink>
-                    <NavLink to="/contact">Contact</NavLink>
-                </div>
+            <div className="header-logo">
+                <NavLink to="/" exact>Blog</NavLink>
             </div>
+            <NavLink to="/" exact>Home</NavLink>
+            <NavLink to="/about">About</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
         </div>
     );
 }
