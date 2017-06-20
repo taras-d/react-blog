@@ -19,7 +19,8 @@ npm run server   # start webpack dev server
 - [x] Contact page
 - [x] Not found page
 - [x] Textbox component
-- [ ] Modal component
+- [x] Modal component
+- [ ] Modal component animation
 - [ ] Contact form
 - [ ] Demo link
 - [ ] Mobile header
