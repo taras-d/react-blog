@@ -8,15 +8,13 @@ const reducer = combineReducers({
     posts: postsReducer
 });
 
-// Enhancer
+// Middleware
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middleware = composeEnhancers(
+    applyMiddleware(ReduxThunk)
+);
 
 // Create store
-const store = createStore(
-    reducer, 
-    composeEnhancers(
-        applyMiddleware(ReduxThunk)
-    )
-);
+const store = createStore(reducer, middleware);
 
 export default store;
