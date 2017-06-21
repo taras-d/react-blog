@@ -3,7 +3,7 @@ import React from 'react';
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
 
-import ContactForm from '../../components/contactForm';
+import ContactForm from './contactForm';
 
 import './contactPage.less';
 
