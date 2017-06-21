@@ -18,7 +18,7 @@ const defaultState = {
     data: [],
     page: 1,
     prev: null,
-    next: null,
+    next: true,
     loading: false,
     error: null
 };

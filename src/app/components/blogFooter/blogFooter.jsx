@@ -66,7 +66,7 @@ class BlogFooter extends React.Component {
                     open={this.state.authorModal}
                     title="Become an Author" 
                     actions={<Button onClick={this.closeAuthorModal}>Ok</Button>}
-                    onBackdropClick={this.closeAuthorModal}
+                    onOutsideClick={this.closeAuthorModal}
                     onEscPress={this.closeAuthorModal}
                 >
                     This feature is not available now<br/>Try again later

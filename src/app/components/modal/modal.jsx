@@ -9,13 +9,13 @@ const propTypes = {
     title: PropTypes.string,
     actions: PropTypes.node,
     children: PropTypes.node,
-    onBackdropClick: PropTypes.func,
+    onOutsideClick: PropTypes.func,
     onEscPress: PropTypes.func
 };
 
 const defaultProps = {
     open: false,
-    onBackdropClick: () => {},
+    onOutsideClick: () => {},
     onEscPress: () => {}
 };
 
@@ -26,28 +26,26 @@ class Modal extends React.Component {
     constructor() {
         super(...arguments);
 
-        this.windowRef = window;
-        this.bodyRef = document.body;
         this.modalRef = null;
 
         this.onKeyUp = this.onKeyUp.bind(this);
+        this.onContentClick = this.onContentClick.bind(this);
     }
 
     render() {
 
-        let { className, title, children, onBackdropClick } = this.props;
-
+        let className = this.props.className;
         className = classNames('modal', className);
 
         return (
-            <div className={className} 
-                ref={el => this.modalRef = el}>
-                <div className="modal-backdrop" 
-                    onClick={onBackdropClick}></div>
-                <div className="modal-content">
-                    {this.renderTitle()}
-                    {this.renderBody()}
-                    {this.renderActions()}
+            <div className={className} ref={el => this.modalRef = el}>
+                <div className="modal-backdrop"></div>
+                <div className="modal-content" onClick={this.onContentClick} >
+                    <div className="modal-box">
+                        {this.renderTitle()}
+                        {this.renderBody()}
+                        {this.renderActions()}
+                    </div>
                 </div>
             </div>
         );
@@ -68,7 +66,7 @@ class Modal extends React.Component {
     }
 
     componentDidMount() {
-        this.windowRef.addEventListener('keyup', this.onKeyUp);
+        window.addEventListener('keyup', this.onKeyUp);
         this.toggleModal();
     }
 
@@ -79,7 +77,7 @@ class Modal extends React.Component {
     }
 
     componentWillUnmount() {
-        this.windowRef.removeEventListener('keyup', this.onKeyUp);
+        window.removeEventListener('keyup', this.onKeyUp);
     }
 
     onKeyUp(event) {
@@ -88,11 +86,17 @@ class Modal extends React.Component {
         }
     }
 
+    onContentClick(event) {
+        if (event.target.classList.contains('modal-content')) {
+            this.props.onOutsideClick(event);
+        }
+    }
+
     toggleModal() {
 
         const open = this.props.open;
 
-        $(this.bodyRef).toggleClass('modal-open', open);
+        $(document.body).toggleClass('modal-open', open);
 
         const modal = $(this.modalRef);
         if (open) {
