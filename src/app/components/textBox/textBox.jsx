@@ -11,6 +11,8 @@ const propTypes = {
     className: PropTypes.string,
     password: PropTypes.bool,
     disabled: PropTypes.bool,
+    minLength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    maxLength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     error: PropTypes.node,
     value: PropTypes.string,
     onValueChange: PropTypes.func
@@ -23,6 +25,8 @@ const defaultProps = {
     className: '',
     password: false,
     disabled: false,
+    minLength: 0,
+    maxLength: 200,
     error: null,
     value: '',
     onValueChange: () => {}
@@ -38,7 +42,7 @@ class TextBox extends React.Component {
     render() {
 
         let { name, multiline, placeholder, className, password, disabled,
-        error, value, onValueChange } = this.props;
+        minLength, maxLength, error, value, onValueChange } = this.props;
 
         className = classNames('textbox', className, { error, disabled });
 
@@ -55,6 +59,8 @@ class TextBox extends React.Component {
                         name={name}
                         placeholder={placeholder} 
                         disabled={disabled}
+                        minLength={minLength}
+                        maxLength={maxLength}
                         value={value} 
                         onChange={this.valueChange}/>:
                     <input className="textbox-input"
@@ -62,6 +68,8 @@ class TextBox extends React.Component {
                         type={password? 'password': 'text'}
                         placeholder={placeholder}
                         disabled={disabled}
+                        minLength={minLength}
+                        maxLength={maxLength}
                         value={value}
                         onChange={this.valueChange}/>
                 }
