@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import $ from 'jquery';
 
 const propTypes = {
     className: PropTypes.string,
@@ -41,7 +42,8 @@ class Modal extends React.Component {
         return (
             <div className={className} 
                 ref={el => this.modalRef = el}>
-                <div className="modal-backdrop" onClick={onBackdropClick}></div>
+                <div className="modal-backdrop" 
+                    onClick={onBackdropClick}></div>
                 <div className="modal-content">
                     {this.renderTitle()}
                     {this.renderBody()}
@@ -87,9 +89,18 @@ class Modal extends React.Component {
     }
 
     toggleModal() {
+
         const open = this.props.open;
-        this.bodyRef.style.overflow = open? 'hidden': 'visible';
-        this.modalRef.classList.toggle('open', open);
+
+        $(this.bodyRef).toggleClass('modal-open', open);
+
+        const modal = $(this.modalRef);
+        if (open) {
+            modal.show(0, () => modal.addClass('open'));
+        } else {
+            modal.removeClass('open');
+            setTimeout(() => modal.hide(), 300);
+        }
     }
 
 }
