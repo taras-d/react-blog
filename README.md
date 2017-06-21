@@ -11,8 +11,3 @@ Design taken from [here](https://startbootstrap.com/template-overviews/clean-blo
 npm install      # install node modules
 npm run server   # start webpack dev server
 ```
-
-## Todo
-- Modal animation
-- Contact form validation
-- Contact message request

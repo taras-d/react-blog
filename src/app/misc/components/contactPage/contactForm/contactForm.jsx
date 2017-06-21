@@ -1,11 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 import validate from 'validate.js';
 
 import TextBox from 'components/textBox';
 import Button from 'components/button';
+import Loader from 'components/loader';
 
 import './contactForm.less';
+
+const propTypes = {
+    status: PropTypes.oneOf(['done', 'pending'])
+};
+
+const defaultProps = {
+    status: 'done'
+};
 
 export class ContactForm extends React.Component {
 
@@ -46,6 +56,8 @@ export class ContactForm extends React.Component {
             data = state.data,
             errors = state.errors || {};
 
+        const pending = this.props.status === 'pending';
+
         return (
             <form className="contact-form"
                 autoComplete="off"
@@ -55,27 +67,47 @@ export class ContactForm extends React.Component {
                     placeholder="Name"
                     value={data.name}
                     error={errors.name}
+                    disabled={pending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="email" 
                     placeholder="Email Address"
                     value={data.email}
                     error={errors.email}
+                    disabled={pending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="phone" 
                     placeholder="Phone Number"
                     value={data.phone}
+                    disabled={pending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="message"
                     placeholder="Message"
                     multiline
                     value={data.message}
                     error={errors.message}
+                    disabled={pending}
                     onValueChange={this.fieldChange}/>
                 <div className="contact-send">
-                    <Button>Send</Button>
+                    {pending?
+                        <Loader/>:
+                        <Button>Send</Button>
+                    }
                 </div>
             </form>
         );
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const status = nextProps.status;
+        if (status !== this.props.status && status === 'done') {
+            this.setState({
+                data: {
+                    name: '', email: '',
+                    phone: '', message: ''
+                }
+            });
+            this.submitted = false;
+        }
     }
 
     fieldChange(value, name, event) {
@@ -85,6 +117,7 @@ export class ContactForm extends React.Component {
     }
 
     submit(event) {
+        
         event.preventDefault();
 
         this.submitted = true;
