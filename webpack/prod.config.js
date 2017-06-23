@@ -13,7 +13,7 @@ var paths = require('./paths.js'),
 module.exports = merge(baseConfig, {
     output: {
         filename: '[name].[hash].min.js',
-        path: path.join(paths.buildDir, 'app')
+        path: path.join(paths.buildDir)
     },
     module: {
         rules: [
