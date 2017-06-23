@@ -1,6 +1,6 @@
 # react-blog
 
-**_In progress!_**
+[Demo](https://taras-d.github.io/react-blog)
 
 Single Page Application blog
 
