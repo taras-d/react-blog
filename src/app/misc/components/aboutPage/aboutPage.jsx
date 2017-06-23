@@ -9,7 +9,7 @@ const AboutPage = () => {
     return (
         <BlogLayout className="about-page">
             <IntroHeader
-                bgImage="/assets/images/about-bg.jpg"
+                bgImage="assets/images/about-bg.jpg"
                 title="About"
                 subtitle="About"
             />

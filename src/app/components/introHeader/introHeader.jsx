@@ -12,7 +12,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-    bgImage: '/assets/images/home-bg.jpg'
+    bgImage: 'assets/images/home-bg.jpg'
 };
 
 const IntroHeader = ({ className, bgImage, title, subtitle }) => {

@@ -16,7 +16,7 @@ const ErrorPage = ({ location }) => {
             <IntroHeader
                 title="Oops!"
                 subtitle="An Error Occurred"
-                imageUrl="/assets/images/about-bg.jpg"
+                imageUrl="assets/images/about-bg.jpg"
             />
             <div className="page-content text-center">
                 {reason}

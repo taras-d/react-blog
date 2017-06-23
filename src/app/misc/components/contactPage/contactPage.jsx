@@ -33,7 +33,7 @@ class ContactPage extends React.Component {
         return (
             <BlogLayout className="contact-page">
                 <IntroHeader
-                    bgImage="/assets/images/contact-bg.jpg"
+                    bgImage="assets/images/contact-bg.jpg"
                     title="Contact"
                     subtitle="Contact"
                 />

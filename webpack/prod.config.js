@@ -33,7 +33,8 @@ module.exports = merge(baseConfig, {
                     use: [
                         { 
                             loader: 'css-loader', 
-                            options: { 
+                            options: {
+                                url: false,
                                 minimize: {
                                     discardComments: { removeAll: true }
                                 }
