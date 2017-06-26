@@ -66,7 +66,7 @@ class ContactPage extends React.Component {
             message: ''
         });
 
-        this.messageSub = this.contactService.sendMessage(data).subscribe(
+        this.messageSub = this.contactService.feedback(data).subscribe(
             res => this.setState({ 
                 formStatus: 'done', 
                 message: res.message 

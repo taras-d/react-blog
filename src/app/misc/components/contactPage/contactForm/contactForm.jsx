@@ -124,7 +124,7 @@ export class ContactForm extends React.Component {
 
         this.validate(() => {
             if (!this.state.errors) {
-                this.props.onSubmit(this.state);
+                this.props.onSubmit(this.state.data);
             }
         });
     }

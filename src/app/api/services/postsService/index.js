@@ -5,30 +5,38 @@ import { delayResponse } from 'api/utils';
 import posts from './data.json';
 posts.forEach(p => p.formatedDate = moment(p.date).format('MMMM DD, YYYY'));
 
-const delay = 300;
-
 export class PostsService {
+
+    constructor(logger) {
+        this.logger = logger;
+    }
 
     getPosts(page = 1, perPage = 5) {
 
-        const from = (page - 1) * perPage,
-            to = page * perPage;
+        this.logger.logGroup('Get posts', { page, perPage });
 
-        const data = posts.slice(from, to);
+        const from = (page - 1) * perPage,
+            to = page * perPage,
+            data = posts.slice(from, to);
 
         const prev = page > 1? page - 1: null,
             next = to < posts.length? page + 1: null;
 
-        return delayResponse({ data, prev, next}, 300);
+        return delayResponse(
+            300,
+            { data, prev, next }
+        );
     }
 
     getPost(id) {
+
+        this.logger.logGroup('Get post', id);
+
         let post = posts.find(i => i.id === id);
+
         return delayResponse(
-            post?
-            { data: post }:
-            { error: { message: '404 Not Found'} },
-            300
+            300,
+            post? { data: post }: { error: { message: '404 Not Found'} }
         );
     }
 

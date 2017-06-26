@@ -9,10 +9,9 @@ export function unsub(...subs) {
     });
 }
 
-export function delayResponse(data, delay = 0) {
+export function delayResponse(delay = 0, data) {
     return Observable.create(obs => {
-
-        const timeoutId = setTimeout(() => {
+        const tId = setTimeout(() => {
             if (data.error) {
                 obs.error(data);
             } else {
@@ -20,7 +19,6 @@ export function delayResponse(data, delay = 0) {
                 obs.complete();
             }
         }, delay);
-
-        return () => clearTimeout(timeoutId);
+        return () => clearTimeout(tId);
     });
 }

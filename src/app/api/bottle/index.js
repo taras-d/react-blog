@@ -1,5 +1,7 @@
 import Bottle from 'bottlejs';
 
+
+import { LoggerService } from '../services/loggerService';
 import { PostsService } from '../services/postsService';
 import { ContactService } from '../services/contactService';
 
@@ -7,8 +9,9 @@ import { ContactService } from '../services/contactService';
 const bottle = new Bottle();
 
 // Register services
-bottle.service('PostsService', PostsService);
-bottle.service('ContactService', ContactService);
+bottle.service('LoggerService', LoggerService);
+bottle.service('PostsService', PostsService, 'LoggerService');
+bottle.service('ContactService', ContactService, 'LoggerService');
 
 // Return service instance by name
 function getService(name) {
