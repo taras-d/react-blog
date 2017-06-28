@@ -57,6 +57,10 @@ module.exports = merge(baseConfig, {
             }
         ]
     },
+    stats: {
+        maxModules: 0,
+        children: false
+    },
     plugins: [
         // Remove previous build
         new CleanWebpackPlugin('build', {
