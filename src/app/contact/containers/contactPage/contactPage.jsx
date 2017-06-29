@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
-import Modal from 'components/modal';
 
-import ContactForm from './contactForm';
+import ContactForm from '../../components/contactForm';
 
-import { getService } from 'api/bottle';
 import { unsub } from 'api/utils';
+
+import * as actions from '../../ducks/contact';
 
 import './contactPage.less';
 
@@ -16,15 +17,8 @@ class ContactPage extends React.Component {
     constructor() {
         super(...arguments);
 
-        this.contactService = getService('ContactService');
-
-        this.state = {
-            formStatus: 'done',
-            message: ''
-        };
-
         this.formRef = null;
-        this.messageSub = null;
+        this.feedbackSub = null;
 
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -38,7 +32,7 @@ class ContactPage extends React.Component {
                     subtitle="Contact"
                 />
                 <div className="page-content">
-                    <p className="text-center">Feel free to contact me at any time</p>
+                    <p className="text-center">Leave feedback</p>
                     {this.renderMessage()}
                     {this.renderForm()}
                 </div>
@@ -47,33 +41,31 @@ class ContactPage extends React.Component {
     }
 
     renderMessage() {
-        const msg = this.state.message;
-        return msg? <div className="contact-message">{msg}</div>: null;
+        const message = this.props.contact.message;
+        return message? <div className="contact-message">{message}</div>: null;
     }
 
     renderForm() {
-        return  <ContactForm onSubmit={this.onSubmit} status={this.state.formStatus}/>
+        const contact = this.props.contact;
+        return  <ContactForm 
+            sending={contact.sending}
+            reset={!!contact.message}
+            onSubmit={this.onSubmit}/>
     }
 
     componentWillUnmount() {
-        unsub(this.messageSub);
+        unsub(this.feedbackSub);
+        const dispatch = this.props.dispatch;
+        dispatch( actions.reset() );
     }
 
     onSubmit(data) {
-
-        this.setState({ 
-            formStatus: 'pending',
-            message: ''
-        });
-
-        this.messageSub = this.contactService.feedback(data).subscribe(
-            res => this.setState({ 
-                formStatus: 'done', 
-                message: res.message 
-            })
-        );
+        const dispatch = this.props.dispatch;
+        this.feedbackSub = dispatch( actions.feedbackAsync(data) ).subscribe();
     }
 
 }
 
-export default ContactPage;
+const mapStateToProps = state => ({ contact: state.contact });
+
+export default connect(mapStateToProps)(ContactPage);

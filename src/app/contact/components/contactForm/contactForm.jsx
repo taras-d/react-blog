@@ -10,11 +10,13 @@ import Loader from 'components/loader';
 import './contactForm.less';
 
 const propTypes = {
-    status: PropTypes.oneOf(['done', 'pending'])
+    sending: PropTypes.bool,
+    reset: PropTypes.bool
 };
 
 const defaultProps = {
-    status: 'done'
+    sending: false,
+    reset: false
 };
 
 export class ContactForm extends React.Component {
@@ -56,39 +58,38 @@ export class ContactForm extends React.Component {
             data = state.data,
             errors = state.errors || {};
 
-        const pending = this.props.status === 'pending';
+        const sending = this.props.sending;
 
         return (
             <form className="contact-form"
-                autoComplete="off"
-                noValidate
+                autoComplete="off" noValidate
                 onSubmit={this.submit}>
                 <TextBox name="name" 
                     placeholder="Name"
                     value={data.name}
                     error={errors.name}
-                    disabled={pending}
+                    disabled={sending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="email" 
                     placeholder="Email Address"
                     value={data.email}
                     error={errors.email}
-                    disabled={pending}
+                    disabled={sending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="phone" 
                     placeholder="Phone Number"
                     value={data.phone}
-                    disabled={pending}
+                    disabled={sending}
                     onValueChange={this.fieldChange}/>
                 <TextBox name="message"
                     placeholder="Message"
                     multiline
                     value={data.message}
                     error={errors.message}
-                    disabled={pending}
+                    disabled={sending}
                     onValueChange={this.fieldChange}/>
                 <div className="contact-send">
-                    {pending?
+                    {sending?
                         <Loader/>:
                         <Button>Send</Button>
                     }
@@ -98,15 +99,9 @@ export class ContactForm extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const status = nextProps.status;
-        if (status !== this.props.status && status === 'done') {
-            this.setState({
-                data: {
-                    name: '', email: '',
-                    phone: '', message: ''
-                }
-            });
-            this.submitted = false;
+        const reset = nextProps.reset;
+        if (reset !== this.props.reset && reset) {
+            this.reset();
         }
     }
 
@@ -117,7 +112,6 @@ export class ContactForm extends React.Component {
     }
 
     submit(event) {
-        
         event.preventDefault();
 
         this.submitted = true;
@@ -130,7 +124,6 @@ export class ContactForm extends React.Component {
     }
 
     validate(callback) {
-
         if (!this.submitted) {
             return;
         }
@@ -143,6 +136,22 @@ export class ContactForm extends React.Component {
         this.setState({ errors }, callback);
     }
 
+    reset() {
+        this.setState({
+            data: {
+                name: '',
+                email: '',
+                phone: '',
+                message: ''
+            },
+            errors: null
+        });
+        this.submitted = false;
+    }
+
 }
+
+ContactForm.propTypes = propTypes;
+ContactForm.defaultProps = defaultProps;
 
 export default ContactForm;

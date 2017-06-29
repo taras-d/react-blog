@@ -11,7 +11,7 @@ export class ContactService {
         this.logger.logGroup('Feedback', data);
 
         return delayResponse(
-            300,
+            700,
             { message: 'Your message successfully sent' }
         );
     }

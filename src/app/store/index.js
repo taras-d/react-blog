@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import { reducer as postsReducer } from '../posts';
+import { reducer as contactReducer } from '../contact';
 
 // Root reducer
 const reducer = combineReducers({
-    posts: postsReducer
+    posts: postsReducer,
+    contact: contactReducer
 });
 
 // Middleware
