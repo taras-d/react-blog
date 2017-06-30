@@ -6,6 +6,7 @@ import { PostsService } from '../services/postsService';
 import { ContactService } from '../services/contactService';
 
 // Create Bottle
+// (https://github.com/young-steveo/bottlejs)
 const bottle = new Bottle();
 
 // Register services

@@ -68,3 +68,5 @@ export const feedbackAsync = data => {
         );
     }
 }
+
+export const reset = () => ({ type: RESET });

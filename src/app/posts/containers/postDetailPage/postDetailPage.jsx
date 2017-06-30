@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
@@ -6,6 +7,7 @@ import { unsub } from 'api/utils';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
+import Button from 'components/button';
 import PostDetail from '../../components/postDetail';
 
 import * as actions from '../../ducks/detail';
@@ -25,6 +27,11 @@ class PostDetailPage extends React.Component {
         return (
             <BlogLayout className="post-detail-page">
                 <PostDetail post={detail.data}/>
+                {detail.data &&
+                    <div className="back-to-list">
+                        <NavLink to="/"><Button>Back to list</Button></NavLink>
+                    </div>
+                }
             </BlogLayout>
         )
     }
