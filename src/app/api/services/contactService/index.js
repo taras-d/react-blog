@@ -1,4 +1,4 @@
-import { delayResponse } from 'api/utils';
+import { mimicHttpRequest } from 'api/utils';
 
 export class ContactService {
 
@@ -10,7 +10,7 @@ export class ContactService {
 
         this.logger.logGroup('Feedback', data);
 
-        return delayResponse(
+        return mimicHttpRequest(
             700,
             { message: 'Your message successfully sent' }
         );

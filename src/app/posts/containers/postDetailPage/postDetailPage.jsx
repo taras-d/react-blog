@@ -17,8 +17,9 @@ class PostDetailPage extends React.Component {
 
     constructor() {
         super(...arguments);
-        this.unlistenHistory = this.props.history.listen( this.historyChange.bind(this) );
+
         this.getSub = null;
+        this.unlistenHistory = this.props.history.listen( this.historyChange.bind(this) );
     }
 
     render() {
@@ -38,6 +39,7 @@ class PostDetailPage extends React.Component {
     componentWillReceiveProps(newProps) {
         let detail = newProps.detail;
         if (detail.error) {
+            // Redirect to error page
             this.props.history.push({
                 pathname: '/error',
                 search: queryString.stringify({ reason: detail.error.message })
@@ -65,6 +67,7 @@ class PostDetailPage extends React.Component {
     }
 
     getPost() {
+        // Dispatch async action
         let { match, dispatch } = this.props;
         this.getSub = dispatch( actions.getPostAsync(match.params.id) ).subscribe();
     }

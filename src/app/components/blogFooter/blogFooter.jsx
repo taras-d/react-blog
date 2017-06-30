@@ -48,11 +48,7 @@ class BlogFooter extends React.Component {
     }
 
     renderCopyright() {
-        return (
-            <div className="copyright">
-                {`Copyright © Blog ${fullYear}`}
-            </div>
-        );
+        return <div className="copyright">{`Copyright © Blog ${fullYear}`}</div>;
     }
 
     renderAuthorModal() {

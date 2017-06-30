@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { delayResponse } from 'api/utils';
+import { mimicHttpRequest } from 'api/utils';
 
 import posts from './data.json';
 posts.forEach(p => p.formatedDate = moment(p.date).format('MMMM DD, YYYY'));
@@ -22,7 +22,7 @@ export class PostsService {
         const prev = page > 1? page - 1: null,
             next = to < posts.length? page + 1: null;
 
-        return delayResponse(
+        return mimicHttpRequest(
             300,
             { data, prev, next }
         );
@@ -34,7 +34,7 @@ export class PostsService {
 
         let post = posts.find(i => i.id === id);
 
-        return delayResponse(
+        return mimicHttpRequest(
             300,
             post? { data: post }: { error: { message: '404 Not Found'} }
         );

@@ -1,6 +1,5 @@
 import Bottle from 'bottlejs';
 
-
 import { LoggerService } from '../services/loggerService';
 import { PostsService } from '../services/postsService';
 import { ContactService } from '../services/contactService';

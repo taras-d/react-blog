@@ -61,7 +61,6 @@ class PostListPage extends React.Component {
     }
 
     componentWillUnmount() {
-
         // Save scroll position
         const dispatch = this.props.dispatch;
         dispatch( actions.saveScroll(window.scrollY) );

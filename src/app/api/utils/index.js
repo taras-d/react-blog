@@ -10,7 +10,7 @@ export function unsub(...subs) {
     });
 }
 
-export function delayResponse(delay = 0, data) {
+export function mimicHttpRequest(delay = 0, data) {
     return Observable.create(obs => {
         const tId = setTimeout(() => {
             if (data.error) {

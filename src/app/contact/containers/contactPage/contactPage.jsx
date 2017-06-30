@@ -7,7 +7,6 @@ import IntroHeader from 'components/introHeader';
 import ContactForm from '../../components/contactForm';
 
 import { unsub } from 'api/utils';
-
 import * as actions from '../../ducks/contact';
 
 import './contactPage.less';
@@ -54,12 +53,16 @@ class ContactPage extends React.Component {
     }
 
     componentWillUnmount() {
+        // Cancel request
         unsub(this.feedbackSub);
+
+        // Reset store data
         const dispatch = this.props.dispatch;
         dispatch( actions.reset() );
     }
 
     onSubmit(data) {
+        // Dispatch async action
         const dispatch = this.props.dispatch;
         this.feedbackSub = dispatch( actions.feedbackAsync(data) ).subscribe();
     }
