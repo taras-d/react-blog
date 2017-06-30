@@ -82,7 +82,12 @@ class TextBox extends React.Component {
     componentDidUpdate(prevProps) {
         const value = this.props.value;
         if (value !== prevProps.value) {
-            this.labelRef.classList.toggle('fadein', value);
+            const labelRef = this.labelRef;
+            if (value && !labelRef.classList.contains('fadein')) {
+                labelRef.classList.add('fadein');
+            } else if (!value) {
+                labelRef.classList.remove('fadein');
+            }
         }
     }
 
