@@ -40,7 +40,7 @@ export default function reducer(state = initialState, action) {
         case FEEDBACK_FAIL:
             return update(state, {
                 sending: {$set: false},
-                error: {$set: payload.error}
+                error: {$set: payload}
             });
 
         case RESET:
@@ -64,7 +64,7 @@ export const feedbackAsync = data => {
         dispatch( feedback() );
         return contactService.feedback(data).do(
             res => dispatch( feedbackOk(res) ),
-            err => dispatch( feedbackFail(res) )
+            err => dispatch( feedbackFail(err) )
         );
     }
 }

@@ -10,10 +10,10 @@ export class ContactService {
 
         this.logger.logGroup('Feedback', data);
 
-        return mimicHttpRequest(
-            700,
-            { message: 'Your message successfully sent' }
-        );
+        return mimicHttpRequest({
+            delay: 750,
+            data: { message: 'Your message successfully sent' }
+        });
     }
 
 }

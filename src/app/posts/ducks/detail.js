@@ -29,12 +29,12 @@ export default function reducer(state = initialState, action) {
 
         case GET_POST_OK:
             return update(state, {
-                data: {$set: action.payload.data}
+                data: {$set: action.payload}
             });
 
         case GET_POST_FAIL:
             return update(state, {
-                error: {$set: action.payload.error}
+                error: {$set: action.payload}
             });
 
         case RESET_POST:

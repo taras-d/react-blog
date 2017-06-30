@@ -22,10 +22,9 @@ export class PostsService {
         const prev = page > 1? page - 1: null,
             next = to < posts.length? page + 1: null;
 
-        return mimicHttpRequest(
-            300,
-            { data, prev, next }
-        );
+        return mimicHttpRequest({
+            data: { data, prev, next }
+        });
     }
 
     getPost(id) {
@@ -33,11 +32,14 @@ export class PostsService {
         this.logger.logGroup('Get post', id);
 
         let post = posts.find(i => i.id === id);
-
-        return mimicHttpRequest(
-            300,
-            post? { data: post }: { error: { message: '404 Not Found'} }
-        );
+        if (post) {
+            return mimicHttpRequest({ data: post });
+        } else {
+            return mimicHttpRequest({
+                status: 400,
+                statusText: 'Not Found'
+            });
+        }
     }
 
 }

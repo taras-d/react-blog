@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
@@ -34,17 +33,6 @@ class PostDetailPage extends React.Component {
                 }
             </BlogLayout>
         )
-    }
-
-    componentWillReceiveProps(newProps) {
-        let detail = newProps.detail;
-        if (detail.error) {
-            // Redirect to error page
-            this.props.history.push({
-                pathname: '/error',
-                search: queryString.stringify({ reason: detail.error.message })
-            });
-        }
     }
     
     componentDidMount() {
