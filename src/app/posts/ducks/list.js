@@ -9,7 +9,7 @@ const postsService = getService('PostsService');
 const GET_POSTS =      'posts/GET_POSTS';
 const GET_POSTS_OK =   'posts/GET_POSTS_OK';
 const GET_POSTS_FAIL = 'posts/GET_POSTS_FAIL';
-const RESET_POSTS    = 'posts/RESET_POSTS';
+const SAVE_SCROLL    = 'posts/SAVE_SCROLL';
 
 
 // Reducer
@@ -20,7 +20,8 @@ const defaultState = {
     prev: null,
     next: true,
     loading: false,
-    error: null
+    error: null,
+    scroll: 0
 };
 
 export default function reducer(state = defaultState, action) {
@@ -45,12 +46,14 @@ export default function reducer(state = defaultState, action) {
 
         case GET_POSTS_FAIL:
             return update(state, {
-                error: {$set: action.payload},
+                error: {$set: payload},
                 loading: {$set: false}
             });
 
-        case RESET_POSTS:
-            return defaultState;
+        case SAVE_SCROLL:
+            return update(state, {
+                scroll: {$set: payload}
+            });
 
         default:
             return state;
@@ -65,8 +68,6 @@ export const getPosts = page => ({ type: GET_POSTS, payload: page });
 export const getPostsOk = data => ({ type: GET_POSTS_OK, payload: data });
 export const getPostsFail = err => ({ type: GET_POSTS_FAIL, payload: err });
 
-export const reset = () => ({ type: RESET_POSTS, payload: null });
-
 export const getPostsAsync = page => {
     return dispatch => {
         dispatch( getPosts(page) );
@@ -76,3 +77,5 @@ export const getPostsAsync = page => {
         );
     }
 }
+
+export const saveScroll = val => ({ type: SAVE_SCROLL, payload: val });

@@ -17,6 +17,7 @@ class PostListPage extends React.Component {
 
     constructor() {
         super(...arguments);
+
         this.getSub = null;
         this.loadMore = this.loadMore.bind(this);
     } 
@@ -48,26 +49,36 @@ class PostListPage extends React.Component {
     }
 
     componentDidMount() {
-        utils.scrollTop();
-        this.getPosts( this.props.list.page );
+        const list = this.props.list;
+
+        // Restore scroll position
+        utils.scrollTop(list.scroll);
+        
+        // Get posts if list is empty
+        if (list.data.length === 0) {
+            this.getPosts(list.page);
+        }
     }
 
     componentWillUnmount() {
+
+        // Save scroll position
+        const dispatch = this.props.dispatch;
+        dispatch( actions.saveScroll(window.scrollY) );
+
+        // Unsubscribe request 
         utils.unsub(this.getSub);
-        this.resetPosts();
     }
 
     loadMore() {
+        // Get next page on load more
         this.getPosts( this.props.list.page + 1 );
     }
 
     getPosts(page) {
-        let { dispatch } = this.props;
+        // Dispatch async action
+        const dispatch = this.props.dispatch;
         this.getSub = dispatch( actions.getPostsAsync(page) ).subscribe();
-    }
-
-    resetPosts() {
-        this.props.dispatch( actions.reset() );
     }
 
 }

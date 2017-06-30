@@ -3,13 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import * as utils from 'api/utils';
-
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
 import Button from 'components/button';
 import PostDetail from '../../components/postDetail';
 
+import * as utils from 'api/utils';
 import * as actions from '../../ducks/detail';
 
 import './postDetailPage.less';
@@ -48,6 +47,7 @@ class PostDetailPage extends React.Component {
     
     componentDidMount() {
         utils.scrollTop();
+        // Get post when component mounted
         this.getPost();
     }
 
@@ -59,6 +59,7 @@ class PostDetailPage extends React.Component {
 
     historyChange(location) {
         if (location.pathname.startsWith('/post/')) {
+            // Get post when id changed
             this.getPost();
         }
     }
