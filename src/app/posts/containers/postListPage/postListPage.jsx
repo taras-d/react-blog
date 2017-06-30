@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
@@ -63,7 +64,7 @@ class PostListPage extends React.Component {
     componentWillUnmount() {
         // Save scroll position
         const dispatch = this.props.dispatch;
-        dispatch( actions.saveScroll(window.scrollY) );
+        dispatch( actions.saveScroll($(window).scrollTop()) );
 
         // Unsubscribe request 
         utils.unsub(this.getSub);
