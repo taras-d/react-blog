@@ -9,18 +9,19 @@ import './errorPage.less';
 const ErrorPage = ({ location }) => {
 
     let params = queryString.parse(location.search),
-        reason = params['reason'] || "Page you are looking for doesn't exist or has been removed";
+        reason = "Page you are looking for doesn't exist or has been removed";
+
+    if (params.status && params.statusText) {
+        reason = `${params.status} ${params.statusText}`;
+    }
 
     return (
         <BlogLayout className="error-page">
             <IntroHeader
                 title="Oops!"
-                subtitle="An Error Occurred"
+                subtitle={reason}
                 imageUrl="assets/images/about-bg.jpg"
             />
-            <div className="page-content text-center">
-                {reason}
-            </div>
         </BlogLayout>
     );
 }

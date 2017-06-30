@@ -36,7 +36,7 @@ export class PostsService {
             return mimicHttpRequest({ data: post });
         } else {
             return mimicHttpRequest({
-                status: 400,
+                status: 404,
                 statusText: 'Not Found'
             });
         }
