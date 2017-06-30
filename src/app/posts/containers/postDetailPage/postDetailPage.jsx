@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import { unsub } from 'api/utils';
+import * as utils from 'api/utils';
 
 import BlogLayout from 'components/blogLayout';
 import IntroHeader from 'components/introHeader';
@@ -47,11 +47,12 @@ class PostDetailPage extends React.Component {
     }
     
     componentDidMount() {
+        utils.scrollTop();
         this.getPost();
     }
 
     componentWillUnmount() {
-        unsub(this.getSub);
+        utils.unsub(this.getSub);
         this.unlistenHistory();
         this.resetPost();
     }

@@ -8,8 +8,7 @@ import Loader from 'components/loader';
 
 import PostList from '../../components/postList';
 
-import { unsub } from 'api/utils';
-
+import * as utils from 'api/utils';
 import * as actions from '../../ducks/list';
 
 import './postListPage.less';
@@ -49,11 +48,12 @@ class PostListPage extends React.Component {
     }
 
     componentDidMount() {
+        utils.scrollTop();
         this.getPosts( this.props.list.page );
     }
 
     componentWillUnmount() {
-        unsub(this.getSub);
+        utils.unsub(this.getSub);
         this.resetPosts();
     }
 
