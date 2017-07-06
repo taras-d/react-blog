@@ -44,6 +44,7 @@
     "moment-mini": "^2.18.1",
     "postcss": "^6.0.3",
     "postcss-loader": "^2.0.6",
+    "react-test-renderer": "^15.6.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-bundle-analyzer": "^2.8.2",
@@ -56,6 +57,14 @@
     "not IE < 9"
   ],
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/src/mocks/styleMock.js"
+    }
   }
 }

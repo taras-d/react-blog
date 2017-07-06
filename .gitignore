@@ -2,3 +2,5 @@
 
 /src/output
 /build
+
+*.log
