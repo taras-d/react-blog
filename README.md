@@ -6,6 +6,15 @@ Single page application that implements [Clean Blog Theme](https://startbootstra
 
 ### Installation
 ```
-npm install     # install node modules
-npm run server  # start webpack dev server
+npm install      # install node modules
+```
+
+### Development
+```
+npm run server   # start webpack dev server
+```
+
+### Production
+```
+npm run test && npm run build    # run tests and then build app for production
 ```
